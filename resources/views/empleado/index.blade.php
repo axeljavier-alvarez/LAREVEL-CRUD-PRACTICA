@@ -1,4 +1,6 @@
 <!-- -->
+
+<a href="{{ url('empleado/create') }}">Nuevo Empleado</a>
 <table class="table table-light">
     <thead class="thead-light">
         <tr>
@@ -15,16 +17,25 @@
     @foreach($empleados as $empleado)
     <tr>
         <td>{{ $empleado->id }}</td>
-        <td>{{ $empleado->Foto }}</td>
-        <td>{{ $empleado->Nombre }}</td>
+
+        <td>
+            <img src="{{ asset('storage').'/'.$empleado->Foto }}" width="100" alt="">
+        </td>
+
+<!--   <td>{{ $empleado->Foto }}</td> -->
+
+        <td>{{ $empleado->nombre }}</td>
         <td>{{ $empleado->ApellidoPaterno }}</td>
         <td>{{ $empleado->ApellidoMaterno }}</td>
         <td>{{ $empleado->Correo }}</td>
-        <td>Editar |
+        <td>
+            <a href="{{ url('/empleado/'. $empleado->id. '/edit') }}">
+                Editar
+            </a> |
             <form action="{{ url('/empleado/'.$empleado->id) }}" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
-                <input type="submit" onclick="return confirm('¿Quieres borrar?')" value="Borrar"> 
+                <input type="submit" onclick="return confirm('¿Quieres borrar?')" value="Borrar">
             </form>
         </td>
     </tr>

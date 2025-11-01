@@ -17,5 +17,5 @@ Route::get('/empleado/create', [EmpleadoController::class, 'create']);
 */
 
 // acceder a todas las rutas
-Route::resource('empleado', EmpleadoController::class);
+Route::resource('empleado', controller: EmpleadoController::class);
 
