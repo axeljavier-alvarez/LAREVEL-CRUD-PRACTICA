@@ -1,4 +1,13 @@
-<!-- -->
+<!-- NAVBAR PARA LISTADO DE EL UI DE LAREVEL -->
+
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+
+@if(Session::has('mensaje'))
+{{ Session::get('mensaje') }}
+@endif
 
 <a href="{{ url('empleado/create') }}">Nuevo Empleado</a>
 <table class="table table-light">
@@ -42,4 +51,7 @@
     @endforeach
 </tbody>
 </table>
+
+</div>
+@endsection
 

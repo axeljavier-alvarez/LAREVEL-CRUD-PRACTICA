@@ -1,3 +1,8 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+
 <form action="{{ url('/empleado') }}" method="post" enctype="multipart/form-data">
     @csrf
 <!--<label for="Nombre">Nombre</label>
@@ -16,5 +21,13 @@
     <input type="file" name="Foto" id="Foto">
     <br>
     <input type="submit" value="Guardar datos"> -->
-@include('empleado.form')
+
+    @csrf
+    @include('empleado.form', ['modo'=>'crear'])
+
+
+
 </form>
+
+</div>
+@endsection

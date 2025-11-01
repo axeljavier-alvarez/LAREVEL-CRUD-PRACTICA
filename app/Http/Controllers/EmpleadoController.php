@@ -42,7 +42,8 @@ class EmpleadoController extends Controller
             $datosEmpleado['Foto']=$request->file('Foto')->store('uploads', 'public');
         }
         Empleado::insert($datosEmpleado);
-        return response()->json($datosEmpleado);
+
+        return redirect('empleado')->with('mensaje', 'Empleado agregado con exito');
     }
 
     /**
@@ -98,8 +99,20 @@ class EmpleadoController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-    {
-        Empleado::destroy($id);
-        return redirect('empleado');
+{
+    $empleado = Empleado::findOrFail($id);
+
+    // borrar archivo si existe en el disco "public"
+    if (!empty($empleado->Foto) && Storage::disk('public')->exists($empleado->Foto)) {
+        Storage::disk('public')->delete($empleado->Foto);
     }
+
+    // eliminar registro (siempre)
+    $empleado->delete();
+
+    return redirect('empleado')->with('mensaje', 'Empleado eliminado correctamente');
+
+     
+}
+
 }

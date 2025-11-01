@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 
@@ -17,5 +17,14 @@ Route::get('/empleado/create', [EmpleadoController::class, 'create']);
 */
 
 // acceder a todas las rutas
-Route::resource('empleado', controller: EmpleadoController::class);
+// autenticacion en rutas como create, update
+Route::resource('empleado', EmpleadoController::class)->middleware('auth');
+Auth::routes(['register'=>false, 'reset'=>false]);
+
+Route::get('/home', [EmpleadoController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', [EmpleadoController::class, 'index'])->name('home');
+});
+
 
