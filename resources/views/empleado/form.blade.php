@@ -1,26 +1,49 @@
     <h1> {{  $modo }} empleado</h1>
 
-    <label for="Nombre">Nombre</label>
-    <input type="text" name="nombre" value="{{ isset($empleado->nombre)?$empleado->nombre:'' }}" id="nombre">
+    @if(count($errors)>0)
+    <div class="alert alert-danger" role="alert">
+        <ul>
+ @foreach($errors->all() as $error)
+ <li>{{ $error }}</li>
+    @endforeach
+        </ul>
+    </div>
+
+    @endif
+<div class="form-group">
+ <label for="Nombre">Nombre</label>
+    <input type="text" class="form-control" name="nombre" value="{{ isset($empleado->nombre)?$empleado->nombre:old('nombre') }}" id="nombre">
+    </div>
+
     <br>
-    <label for="ApellidoPaterno">Apellido Paterno</label>
-    <input type="text" name="ApellidoPaterno" value="{{ isset($empleado->ApellidoPaterno)?$empleado->ApellidoPaterno:'' }}"id="ApellidoPaterno">
+    <div class="form-group">
+        <label for="ApellidoPaterno">Apellido Paterno</label>
+    <input type="text"  class="form-control"  name="ApellidoPaterno" value="{{ isset($empleado->ApellidoPaterno)?$empleado->ApellidoPaterno:old('ApellidoPaterno') }}"id="ApellidoPaterno">
+</div>
     <br>
-    <label for="ApellidoMaterno">Apellido Materno</label>
-    <input type="text" name="ApellidoMaterno" value="{{ isset($empleado->ApellidoMaterno)?$empleado->ApellidoMaterno:'' }}" id="ApellidoMaterno">
+<div class="form-group">
+  <label for="ApellidoMaterno">Apellido Materno</label>
+    <input type="text"  class="form-control"  name="ApellidoMaterno" value="{{ isset($empleado->ApellidoMaterno)?$empleado->ApellidoMaterno:old('ApellidoMaterno') }}" id="ApellidoMaterno">
+</div>
     <br>
-    <label for="Correo">Correo</label>
-    <input type="email" name="Correo" value="{{ isset($empleado->Correo)?$empleado->Correo:'' }}" id="Correo">
+<div class="form-group">
+   <label for="Correo">Correo</label>
+    <input type="email"  class="form-control"  name="Correo" value="{{ isset($empleado->Correo)?$empleado->Correo:old('Correo') }}" id="Correo">
+    </div>
     <br>
-    <label for="Foto">Foto</label>
+<div class="form-group">
+ <label for="Foto">Foto</label>
 
 <!-- ver foto -->
 <label for="Foto"></label>
 @if(isset($empleado->Foto))
 <img src="{{ asset('storage').'/'.$empleado->Foto }}" width="100">
 @endif
-<input type="file" name="Foto" value=""  id="Foto">
+<input class="form-control" type="file" name="Foto" value=""  id="Foto">
+
+    </div>
 
     <br>
-    <input type="submit" value="{{ $modo}} datos">
-<a href="{{ url('empleado') }}">Regresar</a>
+    <input class="btn btn-success" type="submit" value="{{ $modo}} datos">
+<a class="btn btn-primary" href="{{ url('empleado') }}">Regresar</a>
+
